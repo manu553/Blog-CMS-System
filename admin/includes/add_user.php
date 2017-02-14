@@ -26,7 +26,6 @@ if (isset($_POST['create_user']))
 	$create_post_query = mysqli_query($connection, $query);
 
 	confirmQuery($create_post_query);
-
 	header('Location: ./users.php');
 }
 

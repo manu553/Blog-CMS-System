@@ -1,6 +1,20 @@
 <?php ob_start(); ?>
+<?php session_start(); ?>
 <?php include "../includes/db.php" ?>
 <?php include "functions.php" ?>
+
+
+
+<?php
+// restricts guests and users who are not an admin from accessing this page.
+if(!isset($_SESSION['userrole']))
+{  
+    header("Location: ../index.php");
+} else if ($_SESSION['userrole'] !== 'Admin') {
+    header("Location: ../index.php");
+}
+
+?>
 
 
 <!DOCTYPE html>
