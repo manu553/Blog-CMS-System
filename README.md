@@ -1,4 +1,4 @@
-# Bloggerz - A CMS for to help a blogger create a website for there blog.
+# Bloggerz - A CMS to help a blogger create a website for their blog.
 
 Bloggerz is a PHP based CMS that can be used to quickly setup a full blog website with just a few clicks.
 
