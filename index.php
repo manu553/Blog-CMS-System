@@ -20,7 +20,7 @@ include "includes/header.php";
 
                 <?php
 
-                $query = "SELECT * FROM posts";
+                $query = "SELECT * FROM posts WHERE post_status = 'Published'";
                 $posts_query = mysqli_query($connection, $query);
 
                 while($row = mysqli_fetch_assoc($posts_query)) 

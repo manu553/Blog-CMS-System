@@ -49,16 +49,16 @@
                 <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
             </li>
             <li>
-                <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Comments</a>
+                <a href="./comments.php"><i class="fa fa-fw fa-file"></i> Comments</a>
             </li>
             <li>
                 <a href="javascript:;" data-toggle="collapse" data-target="#users_dropdown"><i class="fa fa-fw fa-arrows-v"></i> Users <i class="fa fa-fw fa-caret-down"></i></a>
                 <ul id="users_dropdown" class="collapse">
                     <li>
-                        <a href="#">View all users</a>
+                        <a href="./users.php">View all users</a>
                     </li>
                     <li>
-                        <a href="#">Add user(s)</a>
+                        <a href="users.php?source=add_user">Add user</a>
                     </li>
                 </ul>
             </li>
