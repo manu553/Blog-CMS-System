@@ -60,12 +60,14 @@ if(isset($_POST['create_post']))
 	$update_post = mysqli_query($connection, $query);
 
 	confirmQuery($update_post);
+
+	echo "<p class='bg-success'>Post Updated. <a href='../post.php?p_id={$post_id}'>View Post</a> or <a href='posts.php'>Edit More Posts</a></p>";
 }
 
 ?>
 
 
-
+<h1 class="page-header">Edit Post</h1>
 
 <form action="" method="post" enctype="multipart/form-data">
 	<div class="form-group">
@@ -96,9 +98,22 @@ if(isset($_POST['create_post']))
 		<input class="form-control" type="text" name="author" value="<?php echo $post_author; ?>">
 	</div>
 	<div class="form-group">
-		<label for="status">Post Status</label>
-		<input class="form-control" type="text" name="status" value="<?php echo $post_status ?>">
-	</div>	
+		<label for="post_status">Post Status</label>
+		<select class="form-control" name="status">
+			<option value='<?php echo $post_status ?>'><?php echo $post_status; ?></option>
+
+			<?php
+
+			if($post_status == "Published")
+			{
+				echo "<option value='Draft'>Draft</option>";
+			} else {
+				echo "<option value='Published'>Publish</option>";
+			}
+
+			?>
+		</select>
+	</div>
 	<div class="form-group">
 		<label for="image">Post Image</label><br>
 		<img width="50" height="50" src="../images/<?php echo $post_image; ?>"><br><br>
@@ -110,9 +125,9 @@ if(isset($_POST['create_post']))
 	</div>
 	<div class="form-group">
 		<label for="content">Post Content</label>
-		<textarea class="form-control" type="text" cols='30' rows='10' name="content" ><?php echo $post_title ?></textarea>
+		<textarea class="form-control" type="text" cols='30' rows='10' name="content" ><?php echo $post_content ?></textarea>
 	</div>
 	<div class="form-group">
-		<input class="btn btn-primary" type="submit" name="create_post" value="Publish Post">
+		<input class="btn btn-primary" type="submit" name="create_post" value="Save Changes">
 	</div>
 </form>

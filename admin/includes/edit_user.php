@@ -38,7 +38,19 @@ if (isset($_POST['edit_user']))
 	move_uploaded_file($post_image_temp, "../images/$post_image");
 	*/
 
-	$query = "UPDATE users SET username = '{$username}', user_password = '{$user_password}', user_firstname = '{$user_firstname}', user_lastname = '{$user_lastname}', user_email = '{$user_email}', user_role = '{$user_role}' WHERE user_id = {$user_id}";
+	$query = "SELECT randSalt FROM users";
+	$randsalt_query = mysqli_query($connection, $query);
+
+	if (!$randsalt_query)
+	{
+		die("Query Failed" . mysqli_error($connection));
+	}
+
+	$row = mysqli_fetch_array($randsalt_query);
+	$salt = $row['randSalt'];
+	$hashed_password = crypt($user_password, $salt);
+
+	$query = "UPDATE users SET username = '{$username}', user_password = '{$hashed_password}', user_firstname = '{$user_firstname}', user_lastname = '{$user_lastname}', user_email = '{$user_email}', user_role = '{$user_role}' WHERE user_id = {$user_id}";
 
 	$create_post_query = mysqli_query($connection, $query);
 
@@ -77,8 +89,15 @@ if (isset($_POST['edit_user']))
 	<div class="form-group">
 		<label for="cat_id">User role</label>
 		<select class="form-control" name="user_role">
-			<option value="admin">Admin</option>
-			<option value="subscriber">Subscriber</option>
+			<option value="<?php echo $user_role ?>"><?php echo $user_role ?></option>
+			<?php
+			if($user_role == 'Admin')
+			{
+				echo "<option value='Subscriber'>Subscriber</option>";
+			} else {
+				echo "<option value='Admin'>Admin</option>";
+			}
+			?>
 		</select>
 
 	</div>

@@ -1,3 +1,5 @@
+<h1 class="page-header">Add Post</h1>
+
 <?php
 
 if (isset($_POST['create_post'])) 
@@ -26,12 +28,14 @@ if (isset($_POST['create_post']))
 	$create_post_query = mysqli_query($connection, $query);
 
 	confirmQuery($create_post_query);
+
+	$post_id = mysqli_insert_id($connection);
+
+	echo "<p class='bg-success'>Post Created. <a href='../post.php?p_id={$post_id}'>View Post</a></p>";
 }
 
 
 ?>
-
-
 
 <form action="" method="post" enctype="multipart/form-data">
 	<div class="form-group">
@@ -63,7 +67,11 @@ if (isset($_POST['create_post']))
 	</div>
 	<div class="form-group">
 		<label for="status">Post Status</label>
-		<input class="form-control" type="text" name="status">
+		<select class="form-control" name="status">
+			<option value="Draft">Select Options</option>
+			<option value="Draft">Draft</option>
+			<option value="Published">Publish</option>
+		</select>
 	</div>	
 	<div class="form-group">
 		<label for="image">Post Image</label>

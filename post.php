@@ -55,7 +55,6 @@ include "includes/header.php";
                 <img class="img-responsive" src="images/<?php echo $post_image ?>" alt="">
                 <hr>
                 <p><?php echo $post_content ?></p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 
@@ -67,28 +66,31 @@ include "includes/header.php";
 
                 if(isset($_POST['create_comment']))
                 {
-                    $selected_post = $_GET['p_id'];
 
+                    $selected_post = $_GET['p_id'];
                     $author = $_POST['comment_author'];
                     $email = $_POST['comment_email'];
                     $content = $_POST['comment_content'];
 
-                    $query = "INSERT INTO comments(comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) VALUES ($selected_post, '{$author}', '{$email}', '{$content}', 'Unapproved', now())";
-
-                    $new_comment_query = mysqli_query($connection, $query);
-
-                    if(!$new_comment_query)
+                    if(!empty($author) && !empty($email) && !empty($content))
                     {
-                        die("Query failed" . mysqli_error($connection));
+                        $query = "INSERT INTO comments(comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) VALUES ($selected_post, '{$author}', '{$email}', '{$content}', 'Unapproved', now())";
+
+                        $new_comment_query = mysqli_query($connection, $query);
+
+                        if(!$new_comment_query)
+                        {
+                            die("Query failed" . mysqli_error($connection));
+                        }
+
+                        $query =    "UPDATE posts SET post_comment_count = post_comment_count + 1
+                                    WHERE post_id = {$selected_post}";
+
+                        $update_comment_count = mysqli_query($connection, $query);     
+                    } else {
+                        echo "<script>alert('Fields cannot be empty')</script>";
                     }
-
-                    $query =    "UPDATE posts SET post_comment_count = post_comment_count + 1
-                                WHERE post_id = {$selected_post}";
-
-                    $update_comment_count = mysqli_query($connection, $query);
-                    
                 }
-
                 ?>
 
 
