@@ -65,6 +65,7 @@ if(isset($_POST['checkboxArray']))
             <th>Image</th>
             <th>Tags</th>
             <th>Comments</th>
+            <th>Views</th>
             <th>Date</th>
             <th>View Post</th>
             <th>Edit</th>
@@ -88,6 +89,7 @@ if(isset($_POST['checkboxArray']))
             $post_content = $row['post_content'];
             $post_tags = $row['post_tags'];
             $post_comment_count = $row['post_comment_count'];
+            $post_view_count = $row['post_view_count'];
             $post_status = $row['post_status'];
 
             $query = "SELECT * FROM categories WHERE cat_id = {$post_cat_id}";
@@ -116,6 +118,7 @@ if(isset($_POST['checkboxArray']))
             echo "<td><img width='50' height='50' src='../images/$post_image' alt='image'></td>";
             echo "<td>{$post_tags}</td>";
             echo "<td>{$post_comment_count}</td>";
+            echo "<td><a href='posts.php?reset={$post_id}'>{$post_view_count}</a></td>";
             echo "<td>{$post_date}</td>";
             echo "<td><a href='../post.php?p_id={$post_id}'>View Post</a></td>";
             echo "<td><a href='posts.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
@@ -136,6 +139,17 @@ if(isset($_GET['delete']))
     $delete_query = mysqli_query($connection, $query);
 
     confirmQuery($delete_query);
+
+    header("Location: posts.php");
+}
+
+if(isset($_GET['reset']))
+{
+    $post_id = $_GET['reset'];
+    $query = "UPDATE posts SET post_view_count = 0 WHERE post_id = {$post_id}";
+    $reset_query = mysqli_query($connection, $query);
+
+    confirmQuery($reset_query);
 
     header("Location: posts.php");
 }
