@@ -78,7 +78,19 @@ if(isset($_POST['create_post']))
 		<label for="cat_id">Category</label>
 		<select class="form-control" name="categories">
 		<?php 
-		$query = "SELECT * FROM categories";
+
+		$query = "SELECT * FROM categories WHERE cat_id = '{$post_cat_id}'";
+		$curr_cat_query = mysqli_query($connection, $query);
+
+		confirmQuery($curr_cat_query);
+
+		$row = mysqli_fetch_assoc($curr_cat_query);
+
+		$cat_title = $row['cat_title'];
+
+		echo "<option value='$cat_id'>{$cat_title}</option>";
+
+		$query = "SELECT * FROM categories WHERE cat_id != '{$post_cat_id}'";
 		$categories_query = mysqli_query($connection, $query);
 
 		confirmQuery($categories_query);
