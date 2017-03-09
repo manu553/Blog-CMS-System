@@ -71,9 +71,9 @@ include "includes/header.php";
                 {
 
                     $selected_post = $_GET['p_id'];
-                    $author = $_POST['comment_author'];
-                    $email = $_POST['comment_email'];
-                    $content = $_POST['comment_content'];
+                    $author = escape($_POST['comment_author']);
+                    $email = escape($_POST['comment_email']);
+                    $content = escape($_POST['comment_content']);
 
                     if(!empty($author) && !empty($email) && !empty($content))
                     {
@@ -124,7 +124,7 @@ include "includes/header.php";
 
                 <?php
 
-                $query =   "SELECT * FROM comments WHERE comment_post_id = {$selected_post} AND comment_status= 'Approved' ORDER BY comment_id DESC ";
+                $query = "SELECT * FROM comments WHERE comment_post_id = {$selected_post} AND comment_status= 'Approved' ORDER BY comment_id DESC ";
                 $comment_fetch_query = mysqli_query($connection, $query);
 
                 if(!$comment_fetch_query)

@@ -69,9 +69,9 @@ include "includes/header.php";
                 {
 
                     $selected_post = $_GET['p_id'];
-                    $author = $_POST['comment_author'];
-                    $email = $_POST['comment_email'];
-                    $content = $_POST['comment_content'];
+                    $author = escape($_POST['comment_author']);
+                    $email = escape($_POST['comment_email']);
+                    $content = escape($_POST['comment_content']);
 
                     if(!empty($author) && !empty($email) && !empty($content))
                     {

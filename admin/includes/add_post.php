@@ -4,12 +4,12 @@
 
 if (isset($_POST['create_post'])) 
 {
-	$post_title = $_POST['title'];
-	$post_cat_id = $_POST['categories'];
-	$post_author = $_POST['author'];
-	$post_content = $_POST['content'];
-	$post_tags = $_POST['tags'];
-	$post_status = $_POST['status'];
+	$post_title = escape($_POST['title']);
+	$post_cat_id = escape($_POST['categories']);
+	$post_author = escape($_POST['author']);
+	$post_content = escape($_POST['content']);
+	$post_tags = escape($_POST['tags']);
+	$post_status = escape($_POST['status']);
 
 	$post_image = $_FILES['image']['name'];
 	$post_image_temp = $_FILES['image']['tmp_name'];

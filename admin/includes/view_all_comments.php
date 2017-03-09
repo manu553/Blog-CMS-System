@@ -58,35 +58,45 @@
 
 if(isset($_GET['approve']))
 {
-    $comment_id = $_GET['approve'];
-    $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = $comment_id";
-    $unapprove_comment_query = mysqli_query($connection, $query);
+    if(isset($_SESSION['userrole']) == "Admin")
+    {
+        $comment_id = $_GET['approve'];
+        $query = "UPDATE comments SET comment_status = 'Approved' WHERE comment_id = $comment_id";
+        $unapprove_comment_query = mysqli_query($connection, $query);
 
-    confirmQuery($unapprove_comment_query);
+        confirmQuery($unapprove_comment_query);
 
-    header("Location: comments.php");
+        header("Location: comments.php");
+    }
 }
+    
 
 if(isset($_GET['unapprove']))
 {
-    $comment_id = $_GET['unapprove'];
-    $query = "UPDATE comments SET comment_status = 'Unapproved' WHERE comment_id = $comment_id";
-    $unapprove_comment_query = mysqli_query($connection, $query);
+    if(isset($_SESSION['userrole']) == "Admin")
+    {
+        $comment_id = $_GET['unapprove'];
+        $query = "UPDATE comments SET comment_status = 'Unapproved' WHERE comment_id = $comment_id";
+        $unapprove_comment_query = mysqli_query($connection, $query);
 
-    confirmQuery($unapprove_comment_query);
+        confirmQuery($unapprove_comment_query);
 
-    header("Location: comments.php");
+        header("Location: comments.php");
+    }
 }
 
 if(isset($_GET['delete']))
 {
-    $comment_id = $_GET['delete'];
-    $query = "DELETE FROM comments WHERE comment_id = {$comment_id}";
-    $delete_query = mysqli_query($connection, $query);
+    if(isset($_SESSION['userrole']) == "Admin")
+    {
+        $comment_id = $_GET['delete'];
+        $query = "DELETE FROM comments WHERE comment_id = {$comment_id}";
+        $delete_query = mysqli_query($connection, $query);
 
-    confirmQuery($delete_query);
+        confirmQuery($delete_query);
 
-    header("Location: comments.php");
+        header("Location: comments.php");
+    }
 }
 
 ?>

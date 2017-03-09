@@ -40,7 +40,20 @@
 
                     ?>
                     <li><a href="registration.php">Register</a></li>
-                    <li><a href="">Users Online: <?php echo users_online(); ?></a></li>
+                    <li><a href="">Users Online: <?php echo users_online(); ?></a>
+                    </li>
+                    
+                </ul>
+                <ul class="nav navbar-right top-nav">
+                    <li class="dropdown">
+                        <?php if(isset($_SESSION['username'])) { echo "<a href='#' class='dropdown-toggle' data-toggle='dropdown'><i class='fa fa-user'></i> Hi {$_SESSION['username']}!"; } ?></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            </li>
+                        </ul>
+                    </li>
+                    
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

@@ -134,24 +134,30 @@ if(isset($_POST['checkboxArray']))
 
 if(isset($_GET['delete']))
 {
-    $post_id = $_GET['delete'];
-    $query = "DELETE FROM posts WHERE post_id = {$post_id}";
-    $delete_query = mysqli_query($connection, $query);
+    if(isset($_SESSION['userrole']) == "Admin")
+    {
+        $post_id = $_GET['delete'];
+        $query = "DELETE FROM posts WHERE post_id = {$post_id}";
+        $delete_query = mysqli_query($connection, $query);
 
-    confirmQuery($delete_query);
+        confirmQuery($delete_query);
 
-    header("Location: posts.php");
+        header("Location: posts.php");
+    }
 }
 
 if(isset($_GET['reset']))
 {
-    $post_id = $_GET['reset'];
-    $query = "UPDATE posts SET post_view_count = 0 WHERE post_id = {$post_id}";
-    $reset_query = mysqli_query($connection, $query);
+    if(isset($_SESSION['userrole']) == "Admin")
+    {
+        $post_id = $_GET['reset'];
+        $query = "UPDATE posts SET post_view_count = 0 WHERE post_id = {$post_id}";
+        $reset_query = mysqli_query($connection, $query);
 
-    confirmQuery($reset_query);
+        confirmQuery($reset_query);
 
-    header("Location: posts.php");
+        header("Location: posts.php");
+    }
 }
 
 ?>

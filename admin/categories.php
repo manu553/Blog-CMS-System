@@ -59,8 +59,10 @@
                                     ?>
 
                                     <?php 
-
-                                    deleteCategory();
+                                    if(isset($_SESSION['userrole']) == "Admin")
+                                    {
+                                        deleteCategory();
+                                    }
 
                                     ?>
                                 </tbody>

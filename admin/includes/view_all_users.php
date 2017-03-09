@@ -62,35 +62,45 @@
 
 if(isset($_GET['change_to_admin']))
 {
-    $user_id = $_GET['change_to_admin'];
-    $query = "UPDATE users SET user_role = 'Admin' WHERE user_id = $user_id";
-    $admin_query = mysqli_query($connection, $query);
+    if(isset($_SESSION['userrole']) == "Admin")
+    {
+        $user_id = mysqli_real_escape_string($connection, $_GET['change_to_admin']);
+        $query = "UPDATE users SET user_role = 'Admin' WHERE user_id = $user_id";
+        $admin_query = mysqli_query($connection, $query);
 
-    confirmQuery($admin_query);
+        confirmQuery($admin_query);
 
-    header("Location: users.php");
+        header("Location: users.php");
+    }
 }
 
 if(isset($_GET['change_to_sub']))
 {
-    $user_id = $_GET['change_to_sub'];
-    $query = "UPDATE users SET user_role = 'Subscriber' WHERE user_id = $user_id";
-    $sub_query = mysqli_query($connection, $query);
+    if(isset($_SESSION['userrole']) == "Admin")
+    {
+        $user_id = mysqli_real_escape_string($connection, $_GET['change_to_sub']);
+        $query = "UPDATE users SET user_role = 'Subscriber' WHERE user_id = $user_id";
+        $sub_query = mysqli_query($connection, $query);
 
-    confirmQuery($sub_query);
+        confirmQuery($sub_query);
 
-    header("Location: users.php");
+        header("Location: users.php");
+    }
+    
 }
 
 if(isset($_GET['delete']))
 {
-    $comment_id = $_GET['delete'];
-    $query = "DELETE FROM users WHERE user_id = {$user_id}";
-    $delete_query = mysqli_query($connection, $query);
+    if(isset($_SESSION['userrole']) == "Admin")
+    {
+        $user_id = mysqli_real_escape_string($connection, $_GET['delete']);
+        $query = "DELETE FROM users WHERE user_id = {$user_id}";
+        $delete_query = mysqli_query($connection, $query);
 
-    confirmQuery($delete_query);
+        confirmQuery($delete_query);
 
-    header("Location: users.php");
+        header("Location: users.php");
+    }
 }
 
 ?>
